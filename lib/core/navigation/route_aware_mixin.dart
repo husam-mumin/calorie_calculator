@@ -5,7 +5,7 @@ import 'route_observer.dart';
 /// (e.g., after navigating back to it).
 ///
 /// Usage:
-/// class MyPageState extends State<MyPage> with RouteAwareState<MyPage> {
+/// class MyPageState extends State&lt;MyPage&gt; with RouteAwareState&lt;MyPage&gt; {
 ///   @override
 ///   void onPageVisible() {
 ///     // reload data here
