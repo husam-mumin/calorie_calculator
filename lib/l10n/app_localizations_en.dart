@@ -294,7 +294,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_daily_targets => 'Daily Targets';
 
   @override
-  String get settings_daily_setup_your_profile => 'Setup your profile to calculate daily targets.';
+  String get settings_daily_setup_your_profile =>
+      'Setup your profile to calculate daily targets.';
 
   @override
   String get settings_daily_button_recalculate => 'Recalculate';
@@ -345,7 +346,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_restore_title => 'Restore DB';
 
   @override
-  String get settings_restore_overwrite_confirm => 'This will overwrite current data. Continue?';
+  String get settings_restore_overwrite_confirm =>
+      'This will overwrite current data. Continue?';
 
   @override
   String get common_restore => 'Restore';
@@ -360,7 +362,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_clear_title => 'Clear data';
 
   @override
-  String get settings_clear_confirm => 'This will remove foods, meals, and settings. Continue?';
+  String get settings_clear_confirm =>
+      'This will remove foods, meals, and settings. Continue?';
 
   @override
   String get common_clear => 'Clear';
@@ -375,7 +378,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home_title => 'Calorie Calculator';
 
   @override
-  String get home_enter_valid_anthro => 'Enter valid age, height (cm), and weight (kg)';
+  String get home_enter_valid_anthro =>
+      'Enter valid age, height (cm), and weight (kg)';
 
   @override
   String get form_sex => 'Sex';
@@ -399,7 +403,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get form_activity_level => 'Activity level';
 
   @override
-  String get home_activity_sedentary_desc => 'Sedentary (little or no exercise)';
+  String get home_activity_sedentary_desc =>
+      'Sedentary (little or no exercise)';
 
   @override
   String get home_activity_light_desc => 'Light (1–3 days/week)';

@@ -4,15 +4,40 @@ import 'package:calorie_calculator/core/db/dao/reports_dao.dart';
 import 'package:calorie_calculator/l10n/app_localizations.dart';
 import 'package:calorie_calculator/features/food/data/meal_dao.dart';
 import 'package:calorie_calculator/features/food/models/meal_record.dart';
+import 'package:calorie_calculator/core/navigation/route_aware_mixin.dart';
 
-class ReportsPage extends StatelessWidget {
+class ReportsPage extends StatefulWidget {
   const ReportsPage({super.key});
+
+  @override
+  State<ReportsPage> createState() => _ReportsPageState();
+}
+
+class _ReportsPageState extends State<ReportsPage>
+    with RouteAwareState<ReportsPage> {
+  final GlobalKey<_DailyReportViewState> _dailyKey = GlobalKey();
+  final GlobalKey<_WeeklyReportViewState> _weeklyKey = GlobalKey();
+  final GlobalKey<_MonthlyReportViewState> _monthlyKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    // Initial refresh will be triggered by RouteAware didPush
+    // as soon as the page becomes visible.
+  }
+
+  @override
+  void onPageVisible() {
+    _dailyKey.currentState?.refresh();
+    _weeklyKey.currentState?.refresh();
+    _monthlyKey.currentState?.refresh();
+  }
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: Text(t.reports_title),
@@ -22,16 +47,14 @@ class ReportsPage extends StatelessWidget {
               Tab(text: t.report_tab_daily),
               Tab(text: t.report_tab_weekly),
               Tab(text: t.report_tab_monthly),
-              Tab(text: t.report_tab_progress),
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            _DailyReportView(),
-            _WeeklyReportView(),
-            _MonthlyReportView(),
-            _ProgressView(),
+            _DailyReportView(key: _dailyKey),
+            _WeeklyReportView(key: _weeklyKey),
+            _MonthlyReportView(key: _monthlyKey),
           ],
         ),
       ),
@@ -40,7 +63,7 @@ class ReportsPage extends StatelessWidget {
 }
 
 class _DailyReportView extends StatefulWidget {
-  const _DailyReportView();
+  const _DailyReportView({super.key});
   @override
   State<_DailyReportView> createState() => _DailyReportViewState();
 }
@@ -78,6 +101,8 @@ class _DailyReportViewState extends State<_DailyReportView> {
       _items = items;
     });
   }
+
+  void refresh() => _load();
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +168,7 @@ class _DailyReportViewState extends State<_DailyReportView> {
 }
 
 class _WeeklyReportView extends StatefulWidget {
-  const _WeeklyReportView();
+  const _WeeklyReportView({super.key});
   @override
   State<_WeeklyReportView> createState() => _WeeklyReportViewState();
 }
@@ -309,6 +334,8 @@ class _WeeklyReportViewState extends State<_WeeklyReportView> {
     setState(() => _rows = rows);
   }
 
+  void refresh() => _load();
+
   @override
   Widget build(BuildContext context) {
     final sdf = DateFormat('yyyy-MM-dd');
@@ -368,7 +395,7 @@ class _WeeklyReportViewState extends State<_WeeklyReportView> {
 }
 
 class _MonthlyReportView extends StatefulWidget {
-  const _MonthlyReportView();
+  const _MonthlyReportView({super.key});
   @override
   State<_MonthlyReportView> createState() => _MonthlyReportViewState();
 }
@@ -504,6 +531,8 @@ class _MonthlyReportViewState extends State<_MonthlyReportView> {
     setState(() => _rows = rows);
   }
 
+  void refresh() => _load();
+
   @override
   Widget build(BuildContext context) {
     final daysInMonth = DateUtils.getDaysInMonth(_month.year, _month.month);
@@ -560,22 +589,6 @@ class _MonthlyReportViewState extends State<_MonthlyReportView> {
             );
           },
         ),
-      ],
-    );
-  }
-}
-
-class _ProgressView extends StatelessWidget {
-  const _ProgressView();
-  @override
-  Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        _StatCard(title: t.report_starting_weight, value: '—'),
-        _StatCard(title: t.report_current_weight, value: '—'),
-        _StatCard(title: t.report_goal_weight, value: '—'),
       ],
     );
   }

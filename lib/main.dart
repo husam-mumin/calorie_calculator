@@ -3,7 +3,6 @@ import './l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:calorie_calculator/core/utils/locale_service.dart';
 import 'package:calorie_calculator/core/utils/theme_service.dart';
-
 import './features/auth/screens/login_page.dart';
 import './features/auth/screens/signup_page.dart';
 import './features/app_shell/app_shell.dart';

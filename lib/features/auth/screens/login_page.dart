@@ -192,22 +192,6 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             onFieldSubmitted: (_) => _onLogin(),
                           ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: _rememberMe,
-                                onChanged: (v) =>
-                                    setState(() => _rememberMe = v ?? false),
-                              ),
-                              Text(t.auth_remember_me),
-                              const Spacer(),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(t.auth_forgot_password),
-                              ),
-                            ],
-                          ),
                           const SizedBox(height: 12),
                           SizedBox(
                             height: 52,
@@ -247,7 +231,6 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           // Reserve space so bottom language button doesn't overlap
-                          const SizedBox(height: 84),
                         ],
                       ),
                     ),
